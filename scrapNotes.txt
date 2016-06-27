@@ -1,0 +1,77 @@
+//done
+exports.up = function(knex, Promise) {
+  return knex.schema.createTable('sellers', function(table) {
+    table.increments('sellerId').primary();
+    table.string('sellerFirstName');
+    table.string('sellerLastName');
+    table.string('sellerCell');
+    table.string('sellerImgUrl');
+    table.text('sellerAbout');
+    table.timestamp('sellerSince').defaultTo(knex.fn.now());
+  });
+};
+
+exports.down = function(knex, Promise) {
+  return knex.schema.dropTable('sellers')
+};
+
+
+//not done
+exports.up = function(knex, Promise) {
+  return knex.schema.createTable('shops', function(table) {
+    table.increments('shopId').primary();
+    table.integer('shopSeller_id').unsigned().index().references('sellerId').inTable('sellers').onDelete('cascade');
+    table.string('shopName');
+    table.text('shopAbout');
+    table.string('shopCell');
+    table.string('shopEmail');
+    table.integer('shopStripe_id').unsigned().index().references('stripeId').inTable('stripes');
+    table.integer('shopBitCoin_id').unsigned().index().references('bitCoinId').inTable('bitcoins');
+    table.string('shopPaypalMerchId');
+    table.string('shopImgUrl');
+    table.string('shopPrivacy');
+    table.string('shopReturn');
+    table.timestamp('shopSince').defaultTo(knex.fn.now());
+  });
+};
+
+exports.down = function(knex, Promise) {
+  return knex.schema.dropTable('shops')
+};
+
+
+
+//not done
+exports.up = function(knex, Promise) {
+  return knex.schema.createTable('prods', function(table) {
+    table.increments('prodId').primary();
+    table.string('prodName');
+    table.integer('prodStore_id').unsigned().index().references('shopId').inTable('shops').onDelete('cascade');
+    table.string('prodImgUrl');
+    table.integer('prodImgGal_id').unsigned().index().references('imgGalId').inTable('imggals');
+    table.text('prodAbout');
+    table.decimal('prodPrice',8,2);
+    table.decimal('prodShipAmt',8,2);
+    table.timestamp('prodSince').defaultTo(knex.fn.now());
+  });
+};
+
+exports.down = function(knex, Promise) {
+  return knex.schema.dropTable('prods')
+};
+
+
+
+
+//done
+exports.up = function(knex, Promise) {
+  return knex.schema.createTable('tags', function(table) {
+    table.increments('tagId').primary();
+    table.string('tagKeyword');
+    table.timestamp('tagSince').defaultTo(knex.fn.now());
+  });
+};
+
+exports.down = function(knex, Promise) {
+  return knex.schema.dropTable('tags')
+};
