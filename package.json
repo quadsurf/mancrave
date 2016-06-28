@@ -16,6 +16,7 @@
     "express-handlebars": "^3.0.0",
     "hbs": "~3.1.0",
     "knex": "^0.11.7",
+    "knex-schema-builder": "^0.3.1",
     "locus": "^1.2.0",
     "materialize-css": "^0.97.6",
     "method-override": "^2.3.6",
