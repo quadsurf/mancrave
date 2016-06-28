@@ -51,6 +51,18 @@ app.post('/signup', (req, res) => {
 
 //Sign In
 
+app.get('/signin', (req, res) => {
+  res.render('signin');
+})
+
+
+
+
+
+
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -58,6 +70,7 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
 
 // error handlers
 
