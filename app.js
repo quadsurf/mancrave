@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+// var users = require('./routes/users');
 
 var app = express();
 
@@ -23,7 +23,34 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+// app.use('/users', users);
+
+function Users() {
+  return knex('users')
+}
+
+
+//-------------------------------Authorization ----------------------------------------
+
+
+//Sign Up
+
+app.get('/signup', (req, res) => {
+  res.render('signup');
+})
+
+app.post('/signup', (req, res) => {
+  var hash = bcrypt.hashSync(req.body.password, 8)
+  Users().insert({
+    email: req.params.email,
+    password: hash
+  }).then(() => {
+    res.redirect('/signin')
+  })
+})
+
+//Sign In
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
