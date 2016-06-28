@@ -6,12 +6,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt');
 var passport = require('passport');
-
+var knex = require('./db/knex');
 
 var routes = require('./routes/index');
 // var users = require('./routes/users');
 
 var app = express();
+
+require('locus');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,13 +45,17 @@ app.get('/signup', (req, res) => {
 })
 
 app.post('/signup', (req, res) => {
-  var hash = bcrypt.hashSync(req.body.password, 8)
+  var salt = bcrypt.genSaltSync(10)
+  var hash = bcrypt.hashSync(req.body.password, salt)
   Users().insert({
-    email: req.params.email,
-    password: hash
+    userFirstName: req.body.firstname,
+    userLastName: req.body.lastname,
+    userEmail: req.body.email,
+    userPassword: hash
   }).then(() => {
     res.redirect('/signin')
   })
+
 })
 
 //Sign In
@@ -59,10 +65,10 @@ app.get('/signin', (req, res) => {
 })
 
 app.post('/signin', (req, res) => {
-  Users().findOne({email: req.params.email}).then((user) => {
+  Users().findOne({email: req.params.userEmail}).then((user) => {
     if (user) {
-      var hash = bcrypt.hashSync(req.body.password, 8)
-      if (bcrypt.compareSync(hash, user.password)) {
+      var hash = bcrypt.hashSync(req.body.userPassword, 10)
+      if (bcrypt.compareSync(hash, user.userPassword)) {
         req.session.user = user;
         res.redirect('/');
       } else {
