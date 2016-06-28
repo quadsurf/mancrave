@@ -4,6 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var bcrypt = require('bcrypt');
+var passport = require('passport');
+
 
 var routes = require('./routes/index');
 // var users = require('./routes/users');
@@ -55,6 +58,20 @@ app.get('/signin', (req, res) => {
   res.render('signin');
 })
 
+app.post('/signin', (req, res) => {
+  Users().findOne({email: req.params.email}).then((user) => {
+    if (user) {
+      var hash = bcrypt.hashSync(req.body.password, 8)
+      if (bcrypt.compareSync(hash, user.password)) {
+        req.session.user = user;
+        res.redirect('/');
+      } else {
+        res.render('signin', {error: 'No Email/Password matches'})
+      }
+        res.redirect('signin')
+    }
+  })
+})
 
 
 
