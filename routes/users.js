@@ -10,7 +10,6 @@ var Knex = function() {
 //READ ALL
 router.get('/',function(req,res){
   Knex().then(function(result,err){
-    // console.log(result);
     res.render('users/index',{users:result,layout:'users/layout.hbs'});
   })
 })
@@ -79,16 +78,8 @@ router.put('/:userId', (req,res) => {
       userLastName: user.userLastName,
       userCell: user.userCell,
       userImgUrl: user.userImgUrl,
-      user: user.user,
-      user: user.user,
-      user: user.user,
-      user: user.user,
-      user: user.user,
-      user: user.user,
-      user: user.user,
-      user: user.user,
-      user: user.user,
-      user: user.user
+      userLogo: user.userLogo,
+      userAbout: user.userAbout
     }, 'userId')
     .then((result,err) => {
       res.redirect('/users/'+userId);
@@ -103,7 +94,8 @@ router.delete('/:userId', (req,res) => {
     .first()
     .del()
     .then((result,err) => {
-      res.send(200).end();
+      // res.send(200).end();
+      res.render('users/index',{users:result,layout:'users/layout.hbs'});
       });
 })
 

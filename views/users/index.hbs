@@ -1,4 +1,4 @@
-<div class="container">
+
         <h2>Users</h2>
         <div class="table-responsive">
         <table class="table table-condensed table-hover table-bordered table-striped">
@@ -21,7 +21,7 @@
             <tr>
               <td>{{this.userId}}</td>
               <td>{{this.userEmail}}</td>
-              <td>{{this.userFirstName}} {{this.userLastName}}</td>
+              <td><a href="/users/{{this.userId}}">{{this.userFirstName}} {{this.userLastName}}</a></td>
               <td>{{this.userCell}}</td>
               <td>{{this.user_isSeller}}</td>
               <td>{{this.user_isAdmin}}</td>
@@ -48,4 +48,3 @@
           </tbody>
         </table>
         </div>
-      </div>
