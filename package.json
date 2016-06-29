@@ -12,6 +12,10 @@
     "cookie-session": "^2.0.0-alpha.1",
     "debug": "^2.2.0",
     "dotenv": "^2.0.0",
+<<<<<<< HEAD
+=======
+    "ejs": "^2.4.2",
+>>>>>>> 899365b4908f7c552b69a0286e9ded0d1bf2565c
     "express": "^4.13.4",
     "express-handlebars": "^3.0.0",
     "hbs": "^3.1.1",
@@ -22,6 +26,7 @@
     "morgan": "^1.6.1",
     "multer": "^1.1.0",
     "passport": "^0.3.2",
+    "passport-twitter": "^1.0.4",
     "pg": "^6.0.1",
     "serve-favicon": "^2.3.0"
   }

@@ -4,9 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var bcrypt = require('bcrypt');
+var passport = require('passport');
+
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+// var users = require('./routes/users');
 
 var app = express();
 
@@ -23,7 +26,60 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+// app.use('/users', users);
+
+function Users() {
+  return knex('users')
+}
+
+
+//-------------------------------Authorization ----------------------------------------
+
+
+//Sign Up
+
+app.get('/signup', (req, res) => {
+  res.render('signup');
+})
+
+app.post('/signup', (req, res) => {
+  var hash = bcrypt.hashSync(req.body.password, 8)
+  Users().insert({
+    email: req.params.email,
+    password: hash
+  }).then(() => {
+    res.redirect('/signin')
+  })
+})
+
+//Sign In
+
+app.get('/signin', (req, res) => {
+  res.render('signin');
+})
+
+app.post('/signin', (req, res) => {
+  Users().findOne({email: req.params.email}).then((user) => {
+    if (user) {
+      var hash = bcrypt.hashSync(req.body.password, 8)
+      if (bcrypt.compareSync(hash, user.password)) {
+        req.session.user = user;
+        res.redirect('/');
+      } else {
+        res.render('signin', {error: 'No Email/Password matches'})
+      }
+        res.redirect('signin')
+    }
+  })
+})
+
+
+
+
+
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -31,6 +87,7 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
 
 // error handlers
 
