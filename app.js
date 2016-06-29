@@ -8,7 +8,7 @@ var bcrypt = require('bcrypt');
 var passport = require('passport');
 var knex = require('./db/knex');
 var methodOverride = require("method-override");
-
+var stormpath = require('express-stormpath');
 
 var app = express();
 
@@ -25,7 +25,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method'));
+app.use(stormpath.init(app));
+
+app.on('stormpath.ready', function () {
+  console.log('Stormpath Ready!');
+});
 
 //-------------------------------Begin Price Routes----------------------------------------
 var routes = require('./routes/index');
@@ -52,50 +57,58 @@ function Users() {
   return knex('users')
 }
 
-
+app.post('/logout', function(req,res){
+  res.cookie('access_token', '', { expires: new Date(1), path: '/' })
+  res.cookie('oauthRedirectUri', '', { expires: new Date(1), path: '/' })
+  res.cookie('oauthStateToken', '', { expires: new Date(1), path: '/' })
+  res.cookie('refresh_token', '', { expires: new Date(1), path: '/' })
+  .then(function(result, err){
+  res.redirect('/');
+});
+});
 //-------------------------------Authorization----------------------------------------
 
 
 //Sign Up
 
-app.get('/signup', (req, res) => {
-  res.render('signup');
-})
-
-app.post('/signup', (req, res) => {
-  var salt = bcrypt.genSaltSync(10)
-  var hash = bcrypt.hashSync(req.body.password, salt)
-  Users().insert({
-    userFirstName: req.body.firstname,
-    userLastName: req.body.lastname,
-    userEmail: req.body.email,
-    userPassword: hash
-  }).then(() => {
-    res.redirect('/signin')
-  })
-
-})
-
-//Sign In
-
-app.get('/signin', (req, res) => {
-  res.render('signin');
-})
-
-app.post('/signin', (req, res) => {
-  Users().findOne({email: req.params.userEmail}).then((user) => {
-    if (user) {
-      var hash = bcrypt.hashSync(req.body.userPassword, 10)
-      if (bcrypt.compareSync(hash, user.userPassword)) {
-        req.session.user = user;
-        res.redirect('/');
-      } else {
-        res.render('signin', {error: 'No Email/Password matches'})
-      }
-        res.redirect('signin')
-    }
-  })
-})
+// app.get('/signup', (req, res) => {
+//   res.render('signup');
+// })
+//
+// app.post('/signup', (req, res) => {
+//   var salt = bcrypt.genSaltSync(10)
+//   var hash = bcrypt.hashSync(req.body.password, salt)
+//   Users().insert({
+//     userFirstName: req.body.firstname,
+//     userLastName: req.body.lastname,
+//     userEmail: req.body.email,
+//     userPassword: hash
+//   }).then(() => {
+//     res.redirect('/signin')
+//   })
+//
+// })
+//
+// //Sign In
+//
+// app.get('/signin', (req, res) => {
+//   res.render('signin');
+// })
+//
+// app.post('/signin', (req, res) => {
+//   Users().findOne({email: req.params.userEmail}).then((user) => {
+//     if (user) {
+//       var hash = bcrypt.hashSync(req.body.userPassword, 10)
+//       if (bcrypt.compareSync(hash, user.userPassword)) {
+//         req.session.user = user;
+//         res.redirect('/');
+//       } else {
+//         res.render('signin', {error: 'No Email/Password matches'})
+//       }
+//         res.redirect('signin')
+//     }
+//   })
+// })
 
 
 
