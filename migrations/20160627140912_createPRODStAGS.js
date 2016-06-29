@@ -1,8 +1,8 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('prods_tags', function(table) {
-    table.increments('prod_tag_Id').primary();
-    table.integer('prods_id').unsigned().index().references('prodId').inTable('shops').onDelete('cascade');
-    table.integer('_id').unsigned().index().references('imgGalId').inTable('imggals');
+    table.increments('prod_tagId').primary();
+    table.integer('prod_tagProds_id').unsigned().index().references('prodId').inTable('prods');
+    table.integer('prod_tagTags_id').unsigned().index().references('tagId').inTable('tags');
   });
 };
 
