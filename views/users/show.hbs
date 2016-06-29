@@ -2,7 +2,7 @@
 USERS TABLE COLUMNS
 userId	userEmail	userPassword	userFirstName	userLastName	userCell	userImgUrl	userLogo	userAbout	user_isSeller	user_isAdmin	userSince -->
 
-<br><br>
+
 <div class="row">
 
 
@@ -19,7 +19,7 @@ userId	userEmail	userPassword	userFirstName	userLastName	userCell	userImgUrl	use
               <span class="card-title">Edit Profile Photo</span>
             </div>
             <div class="card-action">
-              <a href="/edit">Edit All</a>
+              <a href="{{user.userId}}/edit">Edit All</a>
             </div>
           </div>
         </div>
@@ -33,8 +33,11 @@ userId	userEmail	userPassword	userFirstName	userLastName	userCell	userImgUrl	use
 
             <li class="collection-item avatar">
               <img src="{{user.userImgUrl}}" alt="" class="circle">
-              <span class="title">{{user.userFirstName}} {{user.userLastName}}</span>
-              <a href="/edit" class="secondary-content"><i class="small material-icons">mode_edit</i></a>
+              <span class="title">NAME</span>
+              <p>
+                {{user.userFirstName}} {{user.userLastName}}
+              </p>
+              <a href="{{user.userId}}/edit" class="secondary-content"><i class="small material-icons">mode_edit</i></a>
             </li>
 
             <li class="collection-item avatar">
@@ -43,7 +46,7 @@ userId	userEmail	userPassword	userFirstName	userLastName	userCell	userImgUrl	use
               <p>
                 {{user.userEmail}}
               </p>
-              <a href="/edit" class="secondary-content"><i class="small material-icons">mode_edit</i></a>
+              <a href="{{user.userId}}/edit" class="secondary-content"><i class="small material-icons">mode_edit</i></a>
             </li>
 
             <li class="collection-item avatar">
@@ -52,7 +55,7 @@ userId	userEmail	userPassword	userFirstName	userLastName	userCell	userImgUrl	use
               <p>
                 {{user.userCell}}
               </p>
-              <a href="/edit" class="secondary-content"><i class="small material-icons">mode_edit</i></a>
+              <a href="{{user.userId}}/edit" class="secondary-content"><i class="small material-icons">mode_edit</i></a>
             </li>
 
             <li class="collection-item avatar">
@@ -61,7 +64,7 @@ userId	userEmail	userPassword	userFirstName	userLastName	userCell	userImgUrl	use
               <p>
                 {{user.userAbout}}
               </p>
-              <a href="/edit" class="secondary-content"><i class="small material-icons">mode_edit</i></a>
+              <a href="{{user.userId}}/edit" class="secondary-content"><i class="small material-icons">mode_edit</i></a>
             </li>
 
 
