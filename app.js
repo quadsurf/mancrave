@@ -7,9 +7,8 @@ var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt');
 var passport = require('passport');
 var knex = require('./db/knex');
+var methodOverride = require("method-override");
 
-var routes = require('./routes/index');
-// var users = require('./routes/users');
 
 var app = express();
 
@@ -26,16 +25,35 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'))
 
+//-------------------------------Begin Price Routes----------------------------------------
+var routes = require('./routes/index');
+// var users = require('./routes/users');
 app.use('/', routes);
 // app.use('/users', users);
+//-------------------------------End Price Routes----------------------------------------
+
+//-------------------------------Begin Chris Routes----------------------------------------
+var usersRoute = require('./routes/users');
+app.use('/users',usersRoute);
+
+var catRoute = require('./routes/cats');
+app.use('/cats',catRoute);
+
+var shopsRoute = require('./routes/shops');
+app.use('/users/:shopUser_id/shops',shopsRoute);
+
+var prodsRoute = require('./routes/prods');
+app.use('/users/:shopUser_id/shops/:prodShop_id/prods',prodsRoute);
+//-------------------------------End Chris Routes----------------------------------------
 
 function Users() {
   return knex('users')
 }
 
 
-//-------------------------------Authorization ----------------------------------------
+//-------------------------------Authorization----------------------------------------
 
 
 //Sign Up
