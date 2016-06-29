@@ -8,7 +8,7 @@ var bcrypt = require('bcrypt');
 var passport = require('passport');
 var knex = require('./db/knex');
 var methodOverride = require("method-override");
-
+var stormpath = require('express-stormpath');
 
 var app = express();
 
@@ -25,7 +25,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method'));
+app.use(stormpath.init(app));
+
+app.on('stormpath.ready', function () {
+  console.log('Stormpath Ready!');
+});
 
 //-------------------------------Begin Price Routes----------------------------------------
 var routes = require('./routes/index');
