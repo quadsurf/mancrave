@@ -38,7 +38,9 @@ app.use(cookieSession({
 app.use(express.static(path.join(__dirname, 'ups')));
 // app.use(express.static(__dirname + "/ups"));
 app.use(methodOverride('_method'));
-app.use(stormpath.init(app));
+app.use(stormpath.init(app, {
+  website: true
+}));
 
 app.on('stormpath.ready', function () {
   console.log('Auth Ready');
