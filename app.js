@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt');
 var passport = require('passport');
 var knex = require('./db/knex');
+var cookieSession = require('cookie-session');
 
 var routes = require('./routes/index');
 // var users = require('./routes/users');
@@ -26,7 +27,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}))
 app.use('/', routes);
 // app.use('/users', users);
 
@@ -58,26 +62,28 @@ app.post('/signup', (req, res) => {
 
 })
 
-//Sign In
+// Sign In
 
 app.get('/signin', (req, res) => {
   res.render('signin');
 })
 
 app.post('/signin', (req, res) => {
-  Users().findOne({email: req.params.userEmail}).then((user) => {
+  Users().where({userEmail: req.body.email}).first().then((user) => {
     if (user) {
-      var hash = bcrypt.hashSync(req.body.userPassword, 10)
-      if (bcrypt.compareSync(hash, user.userPassword)) {
-        req.session.user = user;
-        res.redirect('/');
-      } else {
+      var hash = bcrypt.hashSync(req.body.password, 10)
+      bcrypt.compare(hash, user.password, (res, err) => {
+        req.session.users = user;
+        // eval(locus)
+        // res.redirect('/');
+      })
+  }
+      else {
         res.render('signin', {error: 'No Email/Password matches'})
       }
-        res.redirect('signin')
-    }
+        res.redirect('/')
+    })
   })
-})
 
 
 
