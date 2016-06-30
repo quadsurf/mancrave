@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router({mergeParams:true});
 var knex = require('../db/knex');
 var bcrypt = require('bcrypt');
+var multer = require('multer');
 
 var Knex = function() {
   return knex('users');
@@ -12,7 +13,15 @@ router.get('/',function(req,res){
   Knex().then(function(result,err){
     res.render('users/index',{users:result,layout:'users/layout.hbs'});
   })
-})
+});
+
+//TEST FORM
+router.get('/logouttest',function(req,res){
+    res.render('users/formlogout',{layout:'users/layout3.hbs'});
+  });
+router.post('/logout',function(req,res){
+    res.redirect('/');
+  });
 
 //CREATE
 //Price will Merge This
@@ -66,24 +75,21 @@ router.get('/:userId/edit',function(req,res){
 // UPDATE PUT
 //Users Table Columns
 //userId	userEmail	userPassword	userFirstName	userLastName	userCell	userImgUrl	userLogo	userAbout	user_isSeller	user_isAdmin	userSince
-router.put('/:userId', (req,res) => {
+router.put('/:userId', multer({ dest: './uploads/'}).single('imgfile'), (req,res) => {
   var user = req.body,
-      userId = req.params.userId;
-      console.log('user = ');
-      console.log(user);
-      console.log('userId = ');
-      console.log(userId);
+      userId = req.params.userId,
+      imgfile = req.file.filename;;
   Knex()
-    // .where({userId:userId})
-    // .update({
-    //   userEmail: user.userEmail,
-    //   userPassword: user.userPassword,
-    //   userFirstName: user.userFirstName,
-    //   userLastName: user.userLastName,
-    //   userCell: user.userCell,
-    //   userImgUrl: user.userImgUrl,
-    //   userAbout: user.userAbout
-    // }, 'userId')
+    .where({userId:userId})
+    .update({
+      userEmail: user.userEmail,
+      userPassword: user.userPassword,
+      userFirstName: user.userFirstName,
+      userLastName: user.userLastName,
+      userCell: user.userCell,
+      userImgUrl: user.userImgUrl,
+      userAbout: user.userAbout
+    }, 'userId')
     .then((result,err) => {
       res.redirect('/users/'+userId);
       });

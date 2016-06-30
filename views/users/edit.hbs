@@ -13,33 +13,14 @@ userId	userEmail	userPassword	userFirstName	userLastName	userCell	userImgUrl	use
 
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix"></i>
-            <input id="" name="userFirstName" type="text" class="validate" value="{{#if user.userFirstName}}{{user.userFirstName}}{{/if}}">
-            <label for="">FIRST NAME</label>
+            <input id="userFirstName" name="userFirstName" type="text" class="validate" value="{{#if user.userFirstName}}{{user.userFirstName}}{{/if}}">
+            <label for="userFirstName">FIRST NAME</label>
           </div>
 
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix"></i>
-            <input id="" name="userLastName" type="text" class="validate" value="{{#if user.userLastName}}{{user.userLastName}}{{/if}}">
-            <label for="">LAST NAME</label>
-          </div>
-
-
-        </div>
-
-
-        <div class="row center">
-
-
-          <div class="input-field col s12 m6 l6">
-            <i class="material-icons prefix"></i>
-            <input id="" name="userEmail" type="text" class="validate" value="{{#if user.userEmail}}{{user.userEmail}}{{/if}}">
-            <label for="">USERNAME</label>
-          </div>
-
-          <div class="input-field col s12 m6 l6">
-            <i class="material-icons prefix"></i>
-            <input id="" name="userPassword" type="password" class="validate" value="{{#if user.userPassword}}{{user.userPassword}}{{/if}}">
-            <label for="">PASSWORD</label>
+            <input id="userLastName" name="userLastName" type="text" class="validate" value="{{#if user.userLastName}}{{user.userLastName}}{{/if}}">
+            <label for="userLastName">LAST NAME</label>
           </div>
 
 
@@ -51,8 +32,27 @@ userId	userEmail	userPassword	userFirstName	userLastName	userCell	userImgUrl	use
 
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix"></i>
-            <input id="" name="userCell" type="text" class="validate" value="{{#if user.userCell}}{{user.userCell}}{{/if}}">
-            <label for="">CELL PHONE</label>
+            <input id="userEmail" name="userEmail" type="text" class="validate" value="{{#if user.userEmail}}{{user.userEmail}}{{/if}}">
+            <label for="userEmail">USERNAME</label>
+          </div>
+
+          <div class="input-field col s12 m6 l6">
+            <i class="material-icons prefix"></i>
+            <input id="userPassword" name="userPassword" type="password" class="validate" value="{{#if user.userPassword}}{{user.userPassword}}{{/if}}">
+            <label for="userPassword">PASSWORD</label>
+          </div>
+
+
+        </div>
+
+
+        <div class="row center">
+
+
+          <div class="input-field col s12 m6 l6">
+            <i class="material-icons prefix"></i>
+            <input id="userCell" name="userCell" type="text" class="validate" value="{{#if user.userCell}}{{user.userCell}}{{/if}}">
+            <label for="userCell">CELL PHONE</label>
           </div>
 
           <div class="file-field input-field col s12 m6 l6">
@@ -63,8 +63,7 @@ userId	userEmail	userPassword	userFirstName	userLastName	userCell	userImgUrl	use
             </div>
             <div class="file-path-wrapper">
               <input id="userImgUrl" name="userImgUrl" class="file-path validate" type="text">
-              <label for="">PROFILE PIC</label>
-              <!-- add form input names to all to get req.body -->
+              <label for="userImgUrl">PROFILE PIC</label>
             </div>
           </div>
 
@@ -77,8 +76,8 @@ userId	userEmail	userPassword	userFirstName	userLastName	userCell	userImgUrl	use
 
           <div class="input-field col s12 m12 l12">
             <i class="material-icons prefix"></i>
-            <textarea id="" name="" class="materialize-textarea">{{#if user.userAbout}}{{user.userAbout}}{{/if}}</textarea>
-            <label for="">SHORT BIO</label>
+            <textarea id="userAbout" name="userAbout" class="materialize-textarea">{{#if user.userAbout}}{{user.userAbout}}{{/if}}</textarea>
+            <label for="userAbout">SHORT BIO</label>
 
             <button type="button" onclick="goBack()" class="waves-effect waves-light btn-large left"><span style="color:white;">CANCEL</span></button>
             <script>

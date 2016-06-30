@@ -57,15 +57,15 @@ function Users() {
   return knex('users')
 }
 
-app.post('/logout', function(req,res){
-  res.cookie('access_token', '', { expires: new Date(1), path: '/' })
-  res.cookie('oauthRedirectUri', '', { expires: new Date(1), path: '/' })
-  res.cookie('oauthStateToken', '', { expires: new Date(1), path: '/' })
-  res.cookie('refresh_token', '', { expires: new Date(1), path: '/' })
-  .then(function(result, err){
-  res.redirect('/');
-});
-});
+// app.post('/logout', function(req,res){
+//   res.cookie('access_token', '', { expires: new Date(1), path: '/' })
+//   res.cookie('oauthRedirectUri', '', { expires: new Date(1), path: '/' })
+//   res.cookie('oauthStateToken', '', { expires: new Date(1), path: '/' })
+//   res.cookie('refresh_token', '', { expires: new Date(1), path: '/' })
+//   .then(function(result, err){
+//   res.redirect('/');
+// });
+// });
 //-------------------------------Authorization----------------------------------------
 
 
