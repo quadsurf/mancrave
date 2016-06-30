@@ -1,0 +1,75 @@
+<!--
+USERS TABLE COLUMNS
+userId	userEmail	userPassword	userFirstName	userLastName	userCell	userImgUrl	userLogo	userAbout	user_isSeller	user_isAdmin	userSince -->
+
+
+<div class="row">
+
+
+
+
+        <div class="col s12 m3 l3">
+          <div class="card large">
+            <div class="card-image">
+              {{#if user.userImgUrl}}
+                <img src="../{{user.userImgUrl}}" />
+              {{else}}
+                <img src="../assets/nobody.jpg">
+              {{/if}}
+              <span class="card-title"><a href="{{user.userId}}/edit">Edit Profile Photo</a></span>
+            </div>
+            <div class="card-action">
+              <a href="{{user.userId}}/edit">Edit All</a>
+            </div>
+          </div>
+        </div>
+
+
+
+
+      <div class="col s12 m9 l9">
+
+        <ul class="collection">
+
+            <li class="collection-item avatar">
+              <img src="../{{user.userImgUrl}}" alt="" class="circle">
+              <span class="title">NAME</span>
+              <p>
+                {{user.userFirstName}} {{user.userLastName}}
+              </p>
+              <a href="{{user.userId}}/edit" class="secondary-content"><i class="small material-icons">mode_edit</i></a>
+            </li>
+
+            <li class="collection-item avatar">
+              <i class="material-icons circle">email</i>
+              <span class="title">EMAIL/USERNAME</span>
+              <p>
+                {{user.userEmail}}
+              </p>
+              <a href="{{user.userId}}/edit" class="secondary-content"><i class="small material-icons">mode_edit</i></a>
+            </li>
+
+            <li class="collection-item avatar">
+              <i class="material-icons circle">settings_cell</i>
+              <span class="title">CELL</span>
+              <p>
+                {{user.userCell}}
+              </p>
+              <a href="{{user.userId}}/edit" class="secondary-content"><i class="small material-icons">mode_edit</i></a>
+            </li>
+
+            <li class="collection-item avatar">
+              <i class="material-icons circle">clear_all</i>
+              <span class="title">BIO</span>
+              <p>
+                {{user.userAbout}}
+              </p>
+              <a href="{{user.userId}}/edit" class="secondary-content"><i class="small material-icons">mode_edit</i></a>
+            </li>
+
+
+        </ul>
+
+      </div>
+
+</div>
