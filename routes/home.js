@@ -1,13 +1,15 @@
 var express = require('express');
-var router = express.Router({mergeParams:true});
+var router = express.Router();
 var knex = require('../db/knex');
 var bodyParser = require("body-parser");
 
-router.get('/', function(req,res){
-  res.render('index',{layout:'layout.hbs'})
+
+var Knex = function() {
+  return knex('users');
+}
+
+router.get('/', function(req, res, next) {
+  res.render('home/index', { layout:'home/layout.hbs' });
 });
-
-
-
 
 module.exports = router;

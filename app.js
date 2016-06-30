@@ -11,9 +11,6 @@ var knex = require('./db/knex');
 
 var cookieSession = require('cookie-session');
 
-var routes = require('./routes/index');
-// var users = require('./routes/users');
-
 var methodOverride = require("method-override");
 var stormpath = require('express-stormpath');
 
@@ -47,7 +44,7 @@ app.use(stormpath.init(app, {
   }));
 
 app.on('stormpath.ready', function () {
-  console.log('Stormpath Ready!');
+  console.log('Auth Ready');
 });
 
 //-------------------------------Begin Price Routes----------------------------------------
@@ -62,8 +59,8 @@ app.use('/', routes);
 var usersRoute = require('./routes/users');
 app.use('/users',usersRoute);
 
-var catRoute = require('./routes/cats');
-app.use('/cats',catRoute);
+var catsRoute = require('./routes/cats');
+app.use('/cats',catsRoute);
 
 // var registerRoute = require('./routes/register');
 // app.use('/register',registerRoute);
