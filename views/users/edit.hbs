@@ -1,17 +1,98 @@
-<div class="container">
-  <h3 class="center">Edit Profile</h3>
-  <form class="form" method="post" action="?_method=PUT">
-      <label for="firstname">First Name</label>
-      <input type="text" name="firstname" value=""></br>
+<!--
+USERS TABLE COLUMNS
+userId	userEmail	userPassword	userFirstName	userLastName	userCell	userImgUrl	userAbout	 -->
 
-      <label for="lastname">Last Name</label>
-      <input type="text" name="lastname" value=""></br>
 
-      <label for="email">Email</label>
-      <input type="text" name="email" value=""></br>
 
-      <label for="password">Password</label>
-      <input type="text" name="password" value=""></br>
-      <input type="submit" name="submit" value="Submit" class="grey right">
-    </form>
-</div>
+  <div class="row">
+      <form class="col s12 m12 l12" method="post" action="../{{user.userId}}?_method=PUT">
+
+
+        <div class="row center">
+
+
+          <div class="input-field col s12 m6 l6">
+            <i class="material-icons prefix"></i>
+            <input id="" name="userFirstName" type="text" class="validate" value="{{#if user.userFirstName}}{{user.userFirstName}}{{/if}}">
+            <label for="">FIRST NAME</label>
+          </div>
+
+          <div class="input-field col s12 m6 l6">
+            <i class="material-icons prefix"></i>
+            <input id="" name="userLastName" type="text" class="validate" value="{{#if user.userLastName}}{{user.userLastName}}{{/if}}">
+            <label for="">LAST NAME</label>
+          </div>
+
+
+        </div>
+
+
+        <div class="row center">
+
+
+          <div class="input-field col s12 m6 l6">
+            <i class="material-icons prefix"></i>
+            <input id="" name="userEmail" type="text" class="validate" value="{{#if user.userEmail}}{{user.userEmail}}{{/if}}">
+            <label for="">USERNAME</label>
+          </div>
+
+          <div class="input-field col s12 m6 l6">
+            <i class="material-icons prefix"></i>
+            <input id="" name="userPassword" type="password" class="validate" value="{{#if user.userPassword}}{{user.userPassword}}{{/if}}">
+            <label for="">PASSWORD</label>
+          </div>
+
+
+        </div>
+
+
+        <div class="row center">
+
+
+          <div class="input-field col s12 m6 l6">
+            <i class="material-icons prefix"></i>
+            <input id="" name="userCell" type="text" class="validate" value="{{#if user.userCell}}{{user.userCell}}{{/if}}">
+            <label for="">CELL PHONE</label>
+          </div>
+
+          <div class="file-field input-field col s12 m6 l6">
+            <i class="material-icons prefix"></i>
+            <div class="btn">
+              <span>File</span>
+              <input type="file">
+            </div>
+            <div class="file-path-wrapper">
+              <input id="userImgUrl" name="userImgUrl" class="file-path validate" type="text">
+              <label for="">PROFILE PIC</label>
+              <!-- add form input names to all to get req.body -->
+            </div>
+          </div>
+
+
+        </div>
+
+
+        <div class="row center">
+
+
+          <div class="input-field col s12 m12 l12">
+            <i class="material-icons prefix"></i>
+            <textarea id="" name="" class="materialize-textarea">{{#if user.userAbout}}{{user.userAbout}}{{/if}}</textarea>
+            <label for="">SHORT BIO</label>
+
+            <button type="button" onclick="goBack()" class="waves-effect waves-light btn-large left"><span style="color:white;">CANCEL</span></button>
+            <script>
+              function goBack() {
+                window.history.back();
+              }
+            </script>
+            <button type="submit" name="submit" class="waves-effect waves-light btn-large right">SUBMIT <i class="material-icons right">send</i></button>
+
+          </div>
+
+
+        </div>
+
+
+      </form>
+    </div>

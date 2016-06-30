@@ -58,29 +58,32 @@ router.get('/:userId/edit',function(req,res){
   .first()
   .then((result,err) => {
     var user = result;
-    res.render('users/edit', {user:user,layout:'users/layout2.hbs'});
+    res.render('users/edit', {user:user,layout:'users/layout3.hbs'});
   })
 
 });
 
-// UPDATE POST
+// UPDATE PUT
 //Users Table Columns
 //userId	userEmail	userPassword	userFirstName	userLastName	userCell	userImgUrl	userLogo	userAbout	user_isSeller	user_isAdmin	userSince
 router.put('/:userId', (req,res) => {
   var user = req.body,
       userId = req.params.userId;
+      console.log('user = ');
+      console.log(user);
+      console.log('userId = ');
+      console.log(userId);
   Knex()
-    .where('userId', userId)
-    .update({
-      userEmail: user.userEmail,
-      userPassword: user.userPassword,
-      userFirstName: user.userFirstName,
-      userLastName: user.userLastName,
-      userCell: user.userCell,
-      userImgUrl: user.userImgUrl,
-      userLogo: user.userLogo,
-      userAbout: user.userAbout
-    }, 'userId')
+    // .where({userId:userId})
+    // .update({
+    //   userEmail: user.userEmail,
+    //   userPassword: user.userPassword,
+    //   userFirstName: user.userFirstName,
+    //   userLastName: user.userLastName,
+    //   userCell: user.userCell,
+    //   userImgUrl: user.userImgUrl,
+    //   userAbout: user.userAbout
+    // }, 'userId')
     .then((result,err) => {
       res.redirect('/users/'+userId);
       });
