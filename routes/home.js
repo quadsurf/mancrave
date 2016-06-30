@@ -3,8 +3,8 @@ var router = express.Router({mergeParams:true});
 var knex = require('../db/knex');
 var bodyParser = require("body-parser");
 
-router.get('/', function(res,req){
-  res.render('home/index',{layout:'layout.hbs'})
+router.get('/', function(req,res){
+  res.render('index',{layout:'layout.hbs'})
 });
 
 

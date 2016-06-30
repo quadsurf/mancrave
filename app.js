@@ -65,8 +65,8 @@ app.use('/users',usersRoute);
 var catRoute = require('./routes/cats');
 app.use('/cats',catRoute);
 
-var registerRoute = require('./routes/register');
-app.use('/register',registerRoute);
+// var registerRoute = require('./routes/register');
+// app.use('/register',registerRoute);
 
 var homeRoute = require('./routes/home');
 app.use('/home',homeRoute);
