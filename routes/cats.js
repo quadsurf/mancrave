@@ -1,9 +1,14 @@
 var express = require('express');
 var router = express.Router();
+var knex = require('../db/knex');
+var bodyParser = require("body-parser");
 
-/* GET home page. */
+var Knex = function() {
+  return knex('users');
+}
+
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('cats/index', { layout:'cats/layout.hbs' });
 });
 
 module.exports = router;
