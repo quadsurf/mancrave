@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt');
 var passport = require('passport');
-require('dotenv').config();
+// require('dotenv').config();
 // console.log("NODE_ENV:" + NODE_ENV);
 var knex = require('./db/knex');
 
