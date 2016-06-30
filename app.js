@@ -26,7 +26,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
-app.use(stormpath.init(app));
+app.use(stormpath.init(app, {
+  application: {
+      href: 'https://api.stormpath.com/v1/applications/40oejlPRFhrTTtSU3mOwFc'
+    }
+  }));
 
 app.on('stormpath.ready', function () {
   console.log('Stormpath Ready!');
