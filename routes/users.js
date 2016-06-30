@@ -2,7 +2,11 @@ var express = require('express');
 var router = express.Router({mergeParams:true});
 var knex = require('../db/knex');
 var bcrypt = require('bcrypt');
+var bodyParser = require("body-parser");
 var multer = require('multer');
+
+var jsonParser = bodyParser.json();
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 var Knex = function() {
   return knex('users');
@@ -15,7 +19,7 @@ router.get('/',function(req,res){
   })
 });
 
-//TEST FORM
+//TEST LOGOUT FORM
 router.get('/logouttest',function(req,res){
     res.render('users/formlogout',{layout:'users/layout3.hbs'});
   });
@@ -75,10 +79,14 @@ router.get('/:userId/edit',function(req,res){
 // UPDATE PUT
 //Users Table Columns
 //userId	userEmail	userPassword	userFirstName	userLastName	userCell	userImgUrl	userLogo	userAbout	user_isSeller	user_isAdmin	userSince
-router.put('/:userId', multer({ dest: './uploads/'}).single('imgfile'), (req,res) => {
+// [multer({ dest: './ups/'}).single('imgfile'),jsonParser]
+router.put('/:userId', multer({ dest: './ups/'}).single('userImgUrl'), (req,res) => {
   var user = req.body,
-      userId = req.params.userId,
-      imgfile = req.file.filename;;
+      userId = req.params.userId;
+      // imgfile = req.file.filename;
+  var imgpath = req.file.path;
+  var userImgUrl = imgpath.split('/')[1];
+  console.log(userImgUrl);
   Knex()
     .where({userId:userId})
     .update({
@@ -87,7 +95,7 @@ router.put('/:userId', multer({ dest: './uploads/'}).single('imgfile'), (req,res
       userFirstName: user.userFirstName,
       userLastName: user.userLastName,
       userCell: user.userCell,
-      userImgUrl: user.userImgUrl,
+      userImgUrl: userImgUrl,
       userAbout: user.userAbout
     }, 'userId')
     .then((result,err) => {
@@ -104,7 +112,7 @@ router.delete('/:userId', (req,res) => {
     .del()
     .then((result,err) => {
       // res.send(200).end();
-      res.render('users/index',{users:result,layout:'users/layout.hbs'});
+      res.redirect('/users');
       });
 })
 

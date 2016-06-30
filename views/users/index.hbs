@@ -10,7 +10,6 @@
               <th>Cell</th>
               <th>Has Shop(s)</th>
               <th>Is Admin</th>
-              <th>User Since</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -25,17 +24,16 @@
               <td>{{this.userCell}}</td>
               <td>{{this.user_isSeller}}</td>
               <td>{{this.user_isAdmin}}</td>
-              <td>{{this.userSince}}</td>
               <td>
                 <div style="float:left;">
-                  <form action="/users/{{this.id}}/edit" style="margin:0;padding:0;">
+                  <form action="/users/{{this.userId}}/edit" style="margin:0;padding:0;">
                     <button type="submit" class="btn btn-default btn-sm">
                       <span class="glyphicon glyphicon-pencil"></span> Edit
                     </button>
                   </form>
                 </div>
                 <div style="float:left;">
-                  <form method="post" action="/users/{{this.id}}?_method=DELETE" style="margin:0;padding:0;">
+                  <form method="post" action="/users/{{this.userId}}?_method=DELETE" style="margin:0;padding:0;">
                     <button type="submit" class="btn btn-default btn-sm">
                       <span class="glyphicon glyphicon-trash"></span> Delete
                     </button>

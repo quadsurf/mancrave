@@ -4530,7 +4530,7 @@ small {
   transition: box-shadow .25s;
   padding: 20px;
   margin: 0.5rem 0 1rem 0;
-  border-radius: 2px;
+  border-radius: 6px;
   background-color: #fff;
 }
 
@@ -4543,7 +4543,7 @@ small {
 }
 
 .card .card-title {
-  font-size: 24px;
+  font-size: 14px;
   font-weight: 300;
 }
 
@@ -4590,7 +4590,7 @@ small {
 
 .card .card-image img {
   display: block;
-  border-radius: 2px 2px 0 0;
+  border-radius: 6px 6px 0 0;
   position: relative;
   left: 0;
   right: 0;
@@ -4604,7 +4604,7 @@ small {
   position: absolute;
   bottom: 0;
   left: 0;
-  padding: 20px;
+  padding: 10px;
 }
 
 .card .card-content {
@@ -6441,7 +6441,7 @@ select:disabled {
 }
 
 .file-field .file-path-wrapper {
-  overflow: hidden;
+  overflow: ;
   padding-left: 10px;
 }
 

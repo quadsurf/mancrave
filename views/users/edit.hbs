@@ -5,77 +5,81 @@ userId	userEmail	userPassword	userFirstName	userLastName	userCell	userImgUrl	use
 
 
   <div class="row">
-      <form class="col s12 m12 l12" method="post" action="../{{user.userId}}?_method=PUT">
+      <form class="col s12 m12 l12" method="post" enctype="multipart/form-data" action="../{{user.userId}}?_method=PUT">
 
 
         <div class="row center">
 
 
-          <div class="input-field col s12 m6 l6">
-            <i class="material-icons prefix"></i>
-            <input id="userFirstName" name="userFirstName" type="text" class="validate" value="{{#if user.userFirstName}}{{user.userFirstName}}{{/if}}">
-            <label for="userFirstName">FIRST NAME</label>
-          </div>
-
-          <div class="input-field col s12 m6 l6">
-            <i class="material-icons prefix"></i>
-            <input id="userLastName" name="userLastName" type="text" class="validate" value="{{#if user.userLastName}}{{user.userLastName}}{{/if}}">
-            <label for="userLastName">LAST NAME</label>
-          </div>
-
-
-        </div>
-
-
-        <div class="row center">
-
-
-          <div class="input-field col s12 m6 l6">
-            <i class="material-icons prefix"></i>
-            <input id="userEmail" name="userEmail" type="text" class="validate" value="{{#if user.userEmail}}{{user.userEmail}}{{/if}}">
-            <label for="userEmail">USERNAME</label>
-          </div>
-
-          <div class="input-field col s12 m6 l6">
-            <i class="material-icons prefix"></i>
-            <input id="userPassword" name="userPassword" type="password" class="validate" value="{{#if user.userPassword}}{{user.userPassword}}{{/if}}">
-            <label for="userPassword">PASSWORD</label>
-          </div>
-
-
-        </div>
-
-
-        <div class="row center">
-
-
-          <div class="input-field col s12 m6 l6">
-            <i class="material-icons prefix"></i>
-            <input id="userCell" name="userCell" type="text" class="validate" value="{{#if user.userCell}}{{user.userCell}}{{/if}}">
-            <label for="userCell">CELL PHONE</label>
-          </div>
-
-          <div class="file-field input-field col s12 m6 l6">
-            <i class="material-icons prefix"></i>
-            <div class="btn">
-              <span>File</span>
-              <input type="file">
-            </div>
-            <div class="file-path-wrapper">
-              <input id="userImgUrl" name="userImgUrl" class="file-path validate" type="text">
-              <label for="userImgUrl">PROFILE PIC</label>
+          <div class="col s12 m6 l6">
+            <!-- <input type="file" name="userImgUrl" id="userImgUrl" value="Upload" class="validate"> -->
+            <script type="text/javascript">
+            $(document).ready(function() {
+              $.uploadPreview({
+                input_field: "#image-upload",   // Default: .image-upload
+                preview_box: "#image-preview",  // Default: .image-preview
+                label_field: "#image-label",    // Default: .image-label
+                label_default: "Upload Profile Pic",   // Default: Choose File
+                label_selected: "Change File",  // Default: Change File
+                no_label: false                 // Default: false
+              });
+            });
+            </script>
+            <div id="image-preview" style="background-image: url({{#if user.userImgUrl}}../../{{user.userImgUrl}}{{/if}}); background-repeat:no-repeat;background-size: 400px 400px;">
+              <label for="image-upload" id="image-label">Upload Profile Pic</label>
+              <input type="file" name="userImgUrl" id="image-upload" />
             </div>
           </div>
 
+          <div class="col s12 m6 l6">
+
+
+            <div class="input-field col s12 m12 l12">
+              <i class="material-icons prefix">person_pin</i>
+              <input id="userFirstName" name="userFirstName" type="text" class="validate" value="{{#if user.userFirstName}}{{user.userFirstName}}{{/if}}">
+              <label for="userFirstName">FIRST NAME</label>
+            </div>
+
+            <div class="input-field col s12 m12 l12">
+              <i class="material-icons prefix">person_pin</i>
+              <input id="userLastName" name="userLastName" type="text" class="validate" value="{{#if user.userLastName}}{{user.userLastName}}{{/if}}">
+              <label for="userLastName">LAST NAME</label>
+            </div>
+
+            <div class="input-field col s12 m12 l12">
+              <i class="material-icons prefix">email</i>
+              <input id="userEmail" name="userEmail" type="text" class="validate" value="{{#if user.userEmail}}{{user.userEmail}}{{/if}}">
+              <label for="userEmail">USERNAME</label>
+            </div>
+
+            <div class="input-field col s12 m12 l12">
+              <i class="material-icons prefix">vpn_key</i>
+              <input id="userPassword" name="userPassword" type="password" class="validate" value="{{#if user.userPassword}}{{user.userPassword}}{{/if}}">
+              <label for="userPassword">PASSWORD</label>
+            </div>
+
+            <div class="input-field col s12 m12 l12">
+              <i class="material-icons prefix">settings_cell</i>
+              <input id="userCell" name="userCell" type="text" class="validate" value="{{#if user.userCell}}{{user.userCell}}{{/if}}">
+              <label for="userCell">CELL PHONE</label>
+            </div>
+
+
+          </div>
+
+
+
 
         </div>
+
+
 
 
         <div class="row center">
 
 
           <div class="input-field col s12 m12 l12">
-            <i class="material-icons prefix"></i>
+            <i class="material-icons prefix">clear_all</i>
             <textarea id="userAbout" name="userAbout" class="materialize-textarea">{{#if user.userAbout}}{{user.userAbout}}{{/if}}</textarea>
             <label for="userAbout">SHORT BIO</label>
 

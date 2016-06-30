@@ -25,6 +25,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'ups')));
+// app.use(express.static(__dirname + "/ups"));
 app.use(methodOverride('_method'));
 app.use(stormpath.init(app, {
   application: {
