@@ -3,6 +3,7 @@ var router = express.Router();
 var knex = require('../db/knex');
 var bodyParser = require("body-parser");
 
+
 var Knex = function() {
   return knex('users');
 }
