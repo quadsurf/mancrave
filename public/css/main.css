@@ -1,0 +1,14 @@
+
+  body {
+    background-image: url('https://stories.sandisk.com/assets/images/orig/0354-Pato-Tahiti.jpg');
+    background-size: cover;
+  }
+
+  img {
+    height: 60px;
+    width: 60px;
+  }
+
+  li {
+    font-family: Poiret One;
+  }
