@@ -8,8 +8,15 @@ var bcrypt = require('bcrypt');
 var passport = require('passport');
 require('dotenv').config();
 var knex = require('./db/knex');
+
+var cookieSession = require('cookie-session');
+
+var routes = require('./routes/index');
+// var users = require('./routes/users');
+
 var methodOverride = require("method-override");
 var stormpath = require('express-stormpath');
+
 
 var app = express();
 
@@ -26,6 +33,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}))
 app.use(express.static(path.join(__dirname, 'ups')));
 // app.use(express.static(__dirname + "/ups"));
 app.use(methodOverride('_method'));
@@ -42,6 +53,7 @@ app.on('stormpath.ready', function () {
 //-------------------------------Begin Price Routes----------------------------------------
 var routes = require('./routes/index');
 // var users = require('./routes/users');
+
 app.use('/', routes);
 // app.use('/users', users);
 //-------------------------------End Price Routes----------------------------------------
@@ -81,6 +93,48 @@ function Users() {
 
 //Sign Up
 
+
+app.get('/signup', (req, res) => {
+  res.render('signup');
+})
+
+app.post('/signup', (req, res) => {
+  var salt = bcrypt.genSaltSync(10)
+  var hash = bcrypt.hashSync(req.body.password, salt)
+  Users().insert({
+    userFirstName: req.body.firstname,
+    userLastName: req.body.lastname,
+    userEmail: req.body.email,
+    userPassword: hash
+  }).then(() => {
+    res.redirect('/signin')
+  })
+
+})
+
+// Sign In
+
+app.get('/signin', (req, res) => {
+  res.render('signin');
+})
+
+app.post('/signin', (req, res) => {
+  Users().where({userEmail: req.body.email}).first().then((user) => {
+    if (user) {
+      var hash = bcrypt.hashSync(req.body.password, 10)
+      bcrypt.compare(hash, user.password, (res, err) => {
+        req.session.users = user;
+        // eval(locus)
+        // res.redirect('/');
+      })
+  }
+      else {
+        res.render('signin', {error: 'No Email/Password matches'})
+      }
+        res.redirect('/')
+    })
+  })
+
 // app.get('/signup', (req, res) => {
 //   res.render('signup');
 // })
@@ -119,6 +173,7 @@ function Users() {
 //     }
 //   })
 // })
+
 
 
 
