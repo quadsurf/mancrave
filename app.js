@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt');
 var passport = require('passport');
+require('dotenv').config();
 var knex = require('./db/knex');
 
 var cookieSession = require('cookie-session');
@@ -63,6 +64,9 @@ app.use('/users',usersRoute);
 
 var catRoute = require('./routes/cats');
 app.use('/cats',catRoute);
+
+var homeRoute = require('./routes/home');
+app.use('/home',homeRoute);
 
 var shopsRoute = require('./routes/shops');
 app.use('/users/:shopUser_id/shops',shopsRoute);
