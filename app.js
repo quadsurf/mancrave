@@ -6,7 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt');
 var passport = require('passport');
-require('dotenv').config();
+// require('dotenv').config();
+// console.log("NODE_ENV:" + NODE_ENV);
 var knex = require('./db/knex');
 
 var cookieSession = require('cookie-session');
@@ -38,10 +39,8 @@ app.use(express.static(path.join(__dirname, 'ups')));
 // app.use(express.static(__dirname + "/ups"));
 app.use(methodOverride('_method'));
 app.use(stormpath.init(app, {
-  application: {
-      href: 'https://api.stormpath.com/v1/applications/40oejlPRFhrTTtSU3mOwFc'
-    }
-  }));
+  website: true
+}));
 
 app.on('stormpath.ready', function () {
   console.log('Auth Ready');
@@ -215,5 +214,8 @@ app.use(function(err, req, res, next) {
   });
 });
 
-
-module.exports = app;
+var port = process.env.PORT || 3000;
+app.listen(port, function(){
+  console.log('listening on'+ port);
+})
+// module.exports = app;
