@@ -40,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'ups')));
 app.use(methodOverride('_method'));
 app.use(stormpath.init(app, {
   website: true
+  href: 'https://api.stormpath.com/v1/applications/40oejlPRFhrTTtSU3mOwFc'
 }));
 
 app.on('stormpath.ready', function () {
