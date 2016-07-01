@@ -1,0 +1,71 @@
+body {
+    background-image: url('./0354-Pato-Tahiti.jpg');
+    background-size: cover;
+}
+img {
+    height: 60px;
+    width: 60px;
+}
+
+.yankees {
+  height: 100px;
+  color: #04968A;
+}
+.wrapper {
+  overflow: scroll;
+}
+.formulaone img {
+  height: 200px;
+}
+
+.row {
+  position: relative;
+  top: 50px;
+}
+
+.card-content {
+  height: 100px;
+  background: black;
+  font-family: Poiret One;
+  font-size: 18px;
+}
+
+a  {
+  color: color: #04968A;
+}
+li {
+    font-family: Poiret One;
+}
+.card {
+    height: 250px;
+    width: 250px;
+}
+
+p {
+    display: flex;
+    justify-content: center;
+    top: 50%;
+}
+
+.image {
+  height: 180px;
+  width:80px;
+}
+
+div {
+  display: relative;
+}
+
+.col {
+  height: 200px;
+  width: 100px;
+  top: 25vh;
+  opacity: .8;
+  border-radius: 8%;
+}
+
+h3 {
+  color: #04968A;
+  font-family: Poiret One;
+  text-align: center;
+}

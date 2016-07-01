@@ -12,3 +12,18 @@
   li {
     font-family: Poiret One;
   }
+
+  .title {
+    font-family: Poiret One;
+    text-align: center;
+    color: #04968A;
+    font-size: 100px;
+    padding-bottom: 100px;
+  }
+
+  .titlebox {
+    background-color: black;
+    opacity: .4;
+    height: 150px;
+    top: 130px;
+  }

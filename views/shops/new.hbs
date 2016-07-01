@@ -1,0 +1,81 @@
+
+  <div class="row">
+      <form class="col s12 m12 l12" method="post" enctype="multipart/form-data" action="../shops">
+
+
+        <div class="row center black" style="padding:40px;opacity:0.7;">
+
+<!-- shopId	shopName	shopAbout		shopPaypalMerchId	shopImgUrl				shopUser_id -->
+          <div class="col s12 m6 l6">
+
+            <script type="text/javascript">
+            $(document).ready(function() {
+              $.uploadPreview({
+                input_field: "#image-upload",   // Default: .image-upload
+                preview_box: "#image-preview",  // Default: .image-preview
+                label_field: "#image-label",    // Default: .image-label
+                label_default: "Upload Pic",   // Default: Choose File
+                label_selected: "Change File",  // Default: Change File
+                no_label: false                 // Default: false
+              });
+            });
+            </script>
+            <div id="image-preview" style="background-image: url({{#if shop.shopImgUrl}}../../../{{shop.shopImgUrl}}{{/if}}); background-repeat:no-repeat;background-size: 400px 400px;">
+              <label for="image-upload" id="image-label">Upload Pic</label>
+              <input type="file" name="shopImgUrl" id="image-upload" />
+            </div>
+          </div>
+
+          <div class="col s12 m6 l6">
+
+<!-- shopId	shopName	shopAbout	shopCell	shopEmail	shopPaypalMerchId	shopImgUrl	shopPrivacy	shopReturn	shopSince	shopStripe_id	shopBitCoin_id	shopUser_id -->
+            <div class="input-field col s12 m12 l12">
+              <i class="material-icons prefix">person_pin</i>
+              <input id="shopName" name="shopName" type="text" class="validate" value="{{#if shop.shopName}}{{shop.shopName}}{{/if}}" style="color:white;font-size:20px;font-weight:200;">
+              <label for="shopName">SHOP NAME</label>
+            </div>
+
+            <div class="input-field col s12 m12 l12">
+              <i class="material-icons prefix">person_pin</i>
+              <input id="shopAbout" name="shopAbout" type="text" class="validate" value="{{#if shop.shopAbout}}{{shop.shopAbout}}{{/if}}" style="color:white;font-size:20px;font-weight:200;">
+              <label for="shopAbout">SHOP SLOGAN</label>
+            </div>
+
+            <div class="input-field col s12 m12 l12">
+              <i class="material-icons prefix">email</i>
+              <input id="shopPaypalMerchId" name="shopPaypalMerchId" type="text" class="validate" value="{{#if shop.shopPaypalMerchId}}{{shop.shopPaypalMerchId}}{{/if}}" style="color:white;font-size:20px;font-weight:200;">
+              <label for="shopPaypalMerchId">PAYPAL MERCHANT ID</label>
+            </div>
+
+<!-- shopId	shopName	shopAbout	shopCell	shopEmail	shopPaypalMerchId	shopImgUrl	shopPrivacy	shopReturn	shopSince	shopStripe_id	shopBitCoin_id	shopUser_id -->
+          </div>
+
+
+
+
+        </div>
+
+
+
+
+        <div class="row center">
+
+
+          <div class="input-field col s12 m12 l12">
+
+            <button type="button" onclick="goBack()" class="waves-effect waves-light btn-large left"><span style="color:white;">CANCEL</span></button>
+            <script>
+              function goBack() {
+                window.history.back();
+              }
+            </script>
+            <button type="submit" name="submit" class="waves-effect waves-light btn-large right">SUBMIT <i class="material-icons right">send</i></button>
+
+          </div>
+
+
+        </div>
+
+
+      </form>
+    </div>

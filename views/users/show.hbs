@@ -32,7 +32,11 @@ userId	userEmail	userPassword	userFirstName	userLastName	userCell	userImgUrl	use
         <ul class="collection">
 
             <li class="collection-item avatar">
-              <img src="../{{user.userImgUrl}}" alt="" class="circle">
+              <img src="{{#if user.userImgUrl}}
+                ../{{user.userImgUrl}}
+              {{else}}
+                ../assets/nobody.jpg
+              {{/if}}" alt="" class="circle">
               <span class="title">NAME</span>
               <p>
                 {{user.userFirstName}} {{user.userLastName}}
