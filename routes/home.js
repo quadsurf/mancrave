@@ -9,7 +9,7 @@ var Knex = function() {
 }
 
 router.get('/', function(req, res, next) {
-  res.render('home/index', { layout:'home/layout.hbs' });
+  res.render('cats/index', { layout: 'cats/layout'});
 });
 
 module.exports = router;
