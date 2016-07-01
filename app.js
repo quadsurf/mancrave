@@ -216,10 +216,12 @@ app.use(function(err, req, res, next) {
   });
 });
 
-var port = process.env.PORT || 3000;
-app.listen(port, function(){
-  console.log('listening on'+ port);
-})
+// var port = process.env.PORT || 3000;
+// app.listen(port, function(){
+//   console.log('listening on'+ port);
+// })
+//
 
 //before class pres comment this back out
+
 module.exports = app;
