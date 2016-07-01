@@ -31,22 +31,22 @@ router.post('/logout',function(req,res){
 //Price will Merge This
 //Users Table Columns
 //userId	userEmail	userPassword	userFirstName	userLastName	userCell	userImgUrl	userLogo	userAbout	user_isSeller	user_isAdmin	userSince
-router.get('/new',function(req,res){
-  res.render('users/new');
-});
-router.post('/',function(req,res){
-  var user = req.body;
-  Knex()
-    .insert({
-      userEmail: user.userEmail,
-      userPassword: user.userPassword,
-      userFirstName: user.userFirstName,
-      userLastName: user.userLastName
-      })
-    .then(function(result,err){
-      res.redirect('/users')
-      });
-});
+// router.get('/new',function(req,res){
+//   res.render('users/new',{layout:'users/layout3.hbs'});
+// });
+// router.post('/',function(req,res){
+//   var user = req.body;
+//   Knex()
+//     .insert({
+//       userEmail: user.userEmail,
+//       userPassword: user.userPassword,
+//       userFirstName: user.userFirstName,
+//       userLastName: user.userLastName
+//       })
+//     .then(function(result,err){
+//       res.redirect('/users')
+//       });
+// });
 
 
 // READ ONE
