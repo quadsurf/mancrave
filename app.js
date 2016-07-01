@@ -41,7 +41,7 @@ app.use(express.static(path.join(__dirname, 'ups')));
 app.use(methodOverride('_method'));
 app.use(stormpath.init(app, {
   website: true,
-  href: 'https://api.stormpath.com/v1/applications/3k1rwmEVn32FMiaiXSTpZI'
+  href: 'https://api.stormpath.com/v1/applications/3k1rwmEVn32FMiaiXSTpZI',
 }));
 
 app.on('stormpath.ready', function () {
@@ -220,7 +220,7 @@ app.use(function(err, req, res, next) {
 // app.listen(port, function(){
 //   console.log('listening on'+ port);
 // })
-//
+
 
 //before class pres comment this back out
 
