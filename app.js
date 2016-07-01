@@ -214,8 +214,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-var port = process.env.PORT || 3000;
-app.listen(port, function(){
-  console.log('listening on'+ port);
-})
-// module.exports = app;
+
+
+module.exports = app;
