@@ -47,3 +47,26 @@
   margin: auto;
   text-align: center;
 }
+
+
+/*PRICE CSS*/
+  body {
+    background-image: url('https://stories.sandisk.com/assets/images/orig/0354-Pato-Tahiti.jpg');
+    background-size: cover;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  #logo {
+    height: 60px;
+    width: 60px;
+  }
+
+  li {
+    font-family: Poiret One;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }

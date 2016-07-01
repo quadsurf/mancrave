@@ -32,16 +32,59 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieSession({
   name: 'session',
-  keys: ['key1', 'key2']
-}))
+  keys: [process.env.KEY1,process.env.KEY2]
+}));
 app.use(express.static(path.join(__dirname, 'ups')));
 // app.use(express.static(__dirname + "/ups"));
 app.use(methodOverride('_method'));
+
+
+// app.use(stormpath.init(app, {
+//   application: {
+//       href: 'https://api.stormpath.com/v1/applications/40oejlPRFhrTTtSU3mOwFc'
+//     }
+//   }));
+
+
 app.use(stormpath.init(app, {
+
   application: {
-      href: 'https://api.stormpath.com/v1/applications/40oejlPRFhrTTtSU3mOwFc'
+    href: 'https://api.stormpath.com/v1/applications/40oejlPRFhrTTtSU3mOwFc'
+  },
+
+  web: {
+    login: {
+      enabled: true
+    },
+    logout: {
+      enabled: true
+    },
+    me: {
+      enabled: true
+    },
+    oauth2: {
+      enabled: true
+    },
+    register: {
+      enabled: true,
+      uri: '/users/new',
+      autoLogin: true
+    },
+    logout: {
+      enabled: true,
+      uri: '/logout',
+      nextUri: '/home'
     }
-  }));
+  },
+
+  postRegistrationHandler: function (account, req, res, next) {
+    // var person = JSON.stringify(account);
+    req.session.person = account;
+    res.redirect(302, '/user');//?person='+person
+    // next();
+  }
+
+}));
 
 app.on('stormpath.ready', function () {
   console.log('Auth Ready');
@@ -59,11 +102,17 @@ app.use('/', routes);
 var usersRoute = require('./routes/users');
 app.use('/users',usersRoute);
 
+var userRoute = require('./routes/user');
+app.use('/user',userRoute);
+
+var userrRoute = require('./routes/userr');
+app.use('/userr',userrRoute);
+
 var catsRoute = require('./routes/cats');
 app.use('/cats',catsRoute);
 
-// var registerRoute = require('./routes/register');
-// app.use('/register',registerRoute);
+var exitRoute = require('./routes/exit');
+app.use('/exit',exitRoute);
 
 var homeRoute = require('./routes/home');
 app.use('/home',homeRoute);
